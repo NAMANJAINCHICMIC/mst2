@@ -12,7 +12,7 @@
             <div class="col">
                 
                 <p>Current status {{ item.status }} </p>
-                    <select [(ngModel)] = "item.status">
+                    <select [(ngModel)] = "item.status" (change)="onChange(item.name, item.status)">
         
                         <option *ngIf="item.status!='active'">active</option>
                         <option *ngIf="item.status!='pending'">pending</option>
