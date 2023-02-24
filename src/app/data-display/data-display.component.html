@@ -12,13 +12,23 @@
             <div class="col">
                 
                 <p>Current status {{ item.status }} </p>
-                    <select [(ngModel)] = "item.status" (change)="onChange( item )">
+                    <select name = "sel" [(ngModel)] = "item.status" (change)="onChange( item )" >
         
-                        <option selected>{{item.status}}</option>
-                        <option *ngIf="item.status!== 'active'">active</option>
-                        <option *ngIf="item.status!=='pending'">pending </option>
-                        <option *ngIf="item.status!=='hold'">hold</option>
-                        <option *ngIf="item.status!=='cancelled'">cancelled</option>
+                        <option selected disabled >{{item.status}}</option>
+                        <!-- <option >active</option>
+                        <option >pending </option>
+                        <option >hold</option>
+                        <option >cancelled</option> -->
+<!--                        
+                        <option *ngIf="item.status!= 'active'" selected>active</option>
+                        <option *ngIf="item.status!='pending'" selected>pending </option>
+                        <option *ngIf="item.status!='hold'" selected>hold</option>
+                        <option *ngIf="item.status!='cancelled'" selected>cancelled</option>
+                        -->
+                        <option *ngIf="item.status!== 'active'" >active</option>
+                        <option *ngIf="item.status!=='pending'" >pending </option>
+                        <option *ngIf="item.status!=='hold'" >hold</option>
+                        <option *ngIf="item.status!=='cancelled'" >cancelled</option>
                     </select>
                 </div>
           </li>
