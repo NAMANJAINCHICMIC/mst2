@@ -8,13 +8,24 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit{
-  public userInfo : any;
-  public constructor(private http:HttpClient){}
-  public ngOnInit(): void {
-      const url: string = 'http://localhost:3000/data3';
-      this.http.get(url).subscribe((res)=>{
-        this.userInfo=res;
-      })
+  public userInfo : any = [];
+  
+  public url = "http://localhost:3000/data3";
+  onStatusChange(data:any){
+    
+    this.http.put(this.url+"/" + data.id, data).subscribe(datas => {
+        console.log(datas);
+      });
+    
   }
 
+  public constructor(private http:HttpClient){}
+  public ngOnInit(): void {
+     
+      this.http.get(this.url).subscribe((res)=>{
+        this.userInfo=res;
+      });
+   
+
+    }
 }

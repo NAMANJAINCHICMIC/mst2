@@ -5,19 +5,20 @@
         <ol class="list-group list-group-numbered">
           <li *ngFor="let item of data" class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-              <div class="fw-bold font-fam">{{item.status}}</div>
+              <div class="fw-bold font-fam">{{item.id}}</div>
               {{item.name}}
             </div>
           
             <div class="col">
                 
                 <p>Current status {{ item.status }} </p>
-                    <select [(ngModel)] = "item.status" (change)="onChange(item.name, item.status)">
+                    <select [(ngModel)] = "item.status" (change)="onChange( item )">
         
-                        <option *ngIf="item.status!='active'">active</option>
-                        <option *ngIf="item.status!='pending'">pending</option>
-                        <option *ngIf="item.status!='hold'">hold</option>
-                        <option *ngIf="item.status!='cancelled'">cancelled</option>
+                        <option selected>{{item.status}}</option>
+                        <option *ngIf="item.status!== 'active'">active</option>
+                        <option *ngIf="item.status!=='pending'">pending </option>
+                        <option *ngIf="item.status!=='hold'">hold</option>
+                        <option *ngIf="item.status!=='cancelled'">cancelled</option>
                     </select>
                 </div>
           </li>
