@@ -18,14 +18,20 @@ export class ProjectComponent implements OnInit{
    
     
   }
-  onStatusUnChange(){
+  onStatusUnChange(item:any){
     
-    this.http.get(this.url).subscribe((res)=>{
-      this.userInfo=res;
-      console.log(res);
-    });
+    // this.http.get(this.url).subscribe((res)=>{
+    //   this.userInfo=res;
+    //   console.log(res);
+    // });
+    this.userInfo = item;
+    console.log(item.status)
+  }
+  value!: string;
 
-    
+  onValueChanged(newValue: any) {
+    console.log(newValue);
+    this.userInfo.status = newValue;
   }
 
   public constructor(private http:HttpClient){this.http.get(this.url).subscribe((res)=>{

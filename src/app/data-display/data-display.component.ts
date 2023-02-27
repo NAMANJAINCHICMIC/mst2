@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-data-display',
@@ -6,8 +6,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./data-display.component.css']
 })
 export class DataDisplayComponent implements OnChanges{
-  // [x: string]: any;
-  
+
+[x: string]: any;
+
+  selectedValue!: string;
+  previousValue!: string;
 
   @Input()
   data: {
@@ -18,44 +21,93 @@ export class DataDisplayComponent implements OnChanges{
   }[] = [{id: +"",name: "", status: "", message: ""}];
 
 
-  // @Input() url = "";
+  options = ["active", "pending" , "hold" , "cancelled"];
+
+  @ViewChild('mySelect', { static: true })
+  mySelect!: { nativeElement: { value: string; }; };
+
+
+  ngAfterViewInit() {
+    // this.previousValue = this.mySelect.nativeElement.value;
+  }
+
 
   @Output()
   statusChange : EventEmitter<{item:any }> =new EventEmitter<{item:any }>() 
   @Output()
-  statusUnChange : EventEmitter<void> =new EventEmitter<void>() 
-  onChange(item:any){
-    if(item.status == "hold" ){
-    const msg = prompt("please enter your reason");
-    if (msg == null || msg ==""){
+  statusUnChange : EventEmitter<{item:any }> =new EventEmitter<{item:any }>() 
 
-      // window.location.reload();
-      
-      this.statusUnChange.emit();
-      return ;
-    }
-    else{
-      item.message = msg;
-      this.statusChange.emit(item );
-      return;
-    }
-    }
+  @Output() valueChanged = new EventEmitter<string>();
+
+  // onChange(item:any,selectElement: HTMLSelectElement){
+  //   if(item.status == "hold" ){
+  //   const msg = prompt("please enter your reason");
+  //   if (msg == null || msg ==""){
+
+  //     // window.location.reload();
+  //     // document.getElementById("myForm").reset();
+  //     // item.status.reset();
+  //     // this.statusUnChange.emit();
+  //     // this.mySelect.nativeElement.value = this.previousValue;
+  //     // selectElement.value = this.previousValue;
+  //     // this.selectedValue = this.previousValue;
+  //     // this.resetValue();
+  //     return ;
+  //   }
+  //   else{
+  //     item.message = msg;
+  //     this.statusChange.emit(item );
+  //     return;
+  //   }
+  //   }
     
-    this.statusChange.emit(item);
+  //   this.statusChange.emit(item);
 
+  // }
+
+
+  onSelectChange(item:any,newValue: string) {
+
+    // this.previousValue =  item.status ?? this.selectedValue;
+    // this.previousValue = this.selectedValue;
+    this.selectedValue = newValue;
+    // console.log(item.status)
+    console.log(this.previousValue)
+    console.log(this.selectedValue)
+    if(newValue == "hold" ){
+
+        const msg = prompt("please enter your reason");
+        if (msg == null || msg ==""){
+    
+     
+              this.selectedValue = this.previousValue;
+        // console.log(this.selectedValue)
+        item.status = this.selectedValue
+          this.valueChanged.emit(item.status);
+          //  this.statusUnChange.emit(item);
+          return ;
+        }
+        else{
+          item.message = msg;
+          this.statusChange.emit(item );
+          return;
+        }
+        }
+        
+        this.statusChange.emit(item);
+    
   }
-  constructor(private http:HttpClient) { }
+  onClicked(item:any){
+    this.previousValue = item.status
+  }
+
+  
+
+  constructor(private http:HttpClient ) { }
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
-    // if(this.statusUnChange){
-    //   console.log("hello")
-    //   changes['data'].currentValue = changes['data'].previousValue;
-    // }
    
-    
-    // throw new Error('Method not implemented.');
   }
-  
 
  
 

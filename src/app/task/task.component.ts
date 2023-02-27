@@ -18,6 +18,10 @@ export class TaskComponent implements OnInit{
       });
     
   }
+  onValueChanged(newValue: any) {
+  
+    this.userInfo.status = newValue;
+  }
 
   public constructor(private http:HttpClient){}
   public ngOnInit(): void {
