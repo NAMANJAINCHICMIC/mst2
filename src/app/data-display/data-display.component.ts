@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-data-display',
@@ -30,7 +30,7 @@ export class DataDisplayComponent implements OnChanges{
   onSelectChange(item:any, Event:any) {
 
       if(Event.target.value=="hold"){
-        let msg = prompt("please enter your reason");
+        const msg = prompt("please enter your reason");
         if (msg === null || msg ==""){
          Event.target.value=item.status;
         
@@ -53,9 +53,9 @@ export class DataDisplayComponent implements OnChanges{
   }
   onClicked(item:any,Event :any ){
     if(Event.target.value=="hold"){
-    let msg = prompt("please enter your reason");
+    const msg = prompt("please enter your reason");
     if (msg === null || msg ==""){
-     Event.target.value=item.status
+     Event.target.value=item.status;
     }
   }
   }

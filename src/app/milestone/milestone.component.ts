@@ -17,10 +17,10 @@ export class MilestoneComponent implements OnInit{
       });
     
   }
-  onValueChanged(newValue: any) {
+  // onValueChanged(newValue: any) {
   
-    this.userInfo.status = newValue;
-  }
+  //   this.userInfo.status = newValue;
+  // }
 
   public constructor(private http:HttpClient){}
   public ngOnInit(): void {
