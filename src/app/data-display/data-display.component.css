@@ -1,0 +1,11 @@
+option{
+    /* display: none;
+     */
+     list-style: none;
+     user-select: none;
+     
+}
+select{
+    /* display: none; */
+    user-select: none;
+}
