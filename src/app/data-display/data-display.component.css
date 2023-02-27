@@ -2,10 +2,10 @@ option{
     /* display: none;
      */
      list-style: none;
-     user-select: none;
+/* content-visibility: hidden; */
      
 }
 select{
     /* display: none; */
-    user-select: none;
+    /* content-visibility: hidden; */
 }

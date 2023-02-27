@@ -30,7 +30,7 @@ export class ProjectComponent implements OnInit{
   value!: string;
 
   onValueChanged(newValue: any) {
-    console.log(newValue);
+    // console.log(newValue);
     this.userInfo.status = newValue;
   }
 

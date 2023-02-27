@@ -7,10 +7,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DataDisplayComponent implements OnChanges{
 
-[x: string]: any;
-
-  selectedValue!: string;
-  previousValue!: string;
 
   @Input()
   data: {
@@ -23,82 +19,45 @@ export class DataDisplayComponent implements OnChanges{
 
   options = ["active", "pending" , "hold" , "cancelled"];
 
-  @ViewChild('mySelect', { static: true })
-  mySelect!: { nativeElement: { value: string; }; };
-
-
-  ngAfterViewInit() {
-    // this.previousValue = this.mySelect.nativeElement.value;
-  }
 
 
   @Output()
   statusChange : EventEmitter<{item:any }> =new EventEmitter<{item:any }>() 
-  @Output()
-  statusUnChange : EventEmitter<{item:any }> =new EventEmitter<{item:any }>() 
-
-  @Output() valueChanged = new EventEmitter<string>();
-
-  // onChange(item:any,selectElement: HTMLSelectElement){
-  //   if(item.status == "hold" ){
-  //   const msg = prompt("please enter your reason");
-  //   if (msg == null || msg ==""){
-
-  //     // window.location.reload();
-  //     // document.getElementById("myForm").reset();
-  //     // item.status.reset();
-  //     // this.statusUnChange.emit();
-  //     // this.mySelect.nativeElement.value = this.previousValue;
-  //     // selectElement.value = this.previousValue;
-  //     // this.selectedValue = this.previousValue;
-  //     // this.resetValue();
-  //     return ;
-  //   }
-  //   else{
-  //     item.message = msg;
-  //     this.statusChange.emit(item );
-  //     return;
-  //   }
-  //   }
-    
-  //   this.statusChange.emit(item);
-
-  // }
 
 
-  onSelectChange(item:any,newValue: string) {
 
-    // this.previousValue =  item.status ?? this.selectedValue;
-    // this.previousValue = this.selectedValue;
-    this.selectedValue = newValue;
-    // console.log(item.status)
-    console.log(this.previousValue)
-    console.log(this.selectedValue)
-    if(newValue == "hold" ){
 
-        const msg = prompt("please enter your reason");
-        if (msg == null || msg ==""){
-    
-     
-              this.selectedValue = this.previousValue;
-        // console.log(this.selectedValue)
-        item.status = this.selectedValue
-          this.valueChanged.emit(item.status);
-          //  this.statusUnChange.emit(item);
-          return ;
-        }
+  onSelectChange(item:any, Event:any) {
+
+      if(Event.target.value=="hold"){
+        let msg = prompt("please enter your reason");
+        if (msg === null || msg ==""){
+         Event.target.value=item.status;
+        
+        }  
         else{
           item.message = msg;
+          item.status=Event.target.value;
           this.statusChange.emit(item );
           return;
         }
         }
+        else {
+          item.status=Event.target.value;
+          this.statusChange.emit(item );
+        }
+      
         
-        this.statusChange.emit(item);
+
     
   }
-  onClicked(item:any){
-    this.previousValue = item.status
+  onClicked(item:any,Event :any ){
+    if(Event.target.value=="hold"){
+    let msg = prompt("please enter your reason");
+    if (msg === null || msg ==""){
+     Event.target.value=item.status
+    }
+  }
   }
 
   

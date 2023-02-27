@@ -12,30 +12,20 @@
             <div class="col">
                 
                 <p>Current status {{ item.status }} </p>
+             
                 <form id="myForm">
                     <!-- <select name = "sel" #mySelect value = "mySelectValue"  [(ngModel)] = "item.status"  (ngModelChange)="onSelectChange(item,$event)" (click)="onClicked(item)"> -->
-                    <select name = "sel" #mySelect value = "mySelectValue"  [(ngModel)] = "item.status"  (ngModelChange)="onSelectChange(item,$event)" (click)="onClicked(item)">
-                    <!-- <select name = "sel" #mySelect value = "mySelectValue"  [(ngModel)] = "item.status" (change)="onChange( item ,mySelect )" (ngModelChange)="onSelectChange($event)"> -->
-        
-                        <option selected >{{item.status}}</option>
-                        <!-- <option >active</option>
-                        <option >pending </option>
-                        <option >hold</option>
-                        <option >cancelled</option> -->
-
-                        <!-- <option *ngFor="let option of options" [value]="option">{{ option }}</option> -->
+                    <select  value = {{item.status}}  (change)="onSelectChange(item,$event)">
+                 
+                        <option selected hidden>{{item.status}}</option>
+                     
                        
-                        <option *ngIf="item.status!= 'active'" selected>active </option>
-                        <option *ngIf="item.status!='pending'" selected>pending </option>
-                        <option *ngIf="item.status!='hold'" selected>hold</option>
-                        <option *ngIf="item.status!='cancelled'" selected>cancelled</option>
+                        <option value="active" [selected]="item.status=='active'">active </option>
+                        <option value = "pending" [selected]="item.status=='pending'">pending </option>
+                        <option  value="hold" [selected]="item.status=='hold'">hold</option>
+                        <option value="cancelled" [selected]="item.status=='cancelled'">cancelled</option>
                        
-                        
-                        <!-- <option *ngIf="item.status!== 'active'" value="active" >active</option>
-                        <option *ngIf="item.status!=='pending'" value = "pending">pending </option>
-                  
-                        <option *ngIf="item.status!=='hold'" value="hold" >hold</option>
-                        <option *ngIf="item.status!=='cancelled'" value="cancelled">cancelled</option> -->
+                     
                     </select>
                   </form>
                 </div>
