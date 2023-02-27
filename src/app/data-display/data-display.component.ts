@@ -28,7 +28,7 @@ export class DataDisplayComponent implements OnChanges{
     if(item.status == "hold" ){
     const msg = prompt("please enter your reason");
     if (msg == null || msg ==""){
-
+      const changeBool = false;
       // window.location.reload();
       
       this.statusUnChange.emit();
